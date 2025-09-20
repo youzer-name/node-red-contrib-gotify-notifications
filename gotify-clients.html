@@ -1,0 +1,29 @@
+<script type="text/javascript">
+    RED.nodes.registerType('gotify-clients',{
+        category: 'config',
+        defaults: {
+            clientname: {value:"", required:true},
+            token: {value:"", required:true}
+        },
+        label: function() {
+            return this.clientname;
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="gotify-clients">
+    <div class="form-row">
+        <label for="node-config-input-clientname"><i class="fa fa-tag"></i> Client Name</label>
+        <input type="text" id="node-config-input-clientname" placeholder="Friendly client name">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-token"><i class="fa fa-key"></i> Token</label>
+        <input type="text" id="node-config-input-token" placeholder="Client token (required)">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="gotify-clients">
+    <p><b>Gotify Client</b></p>
+    <p>Create one <b>Client</b> config node per Gotify client token. This token is used by the <code>gotify-subscribe</code> node to listen for messages.</p>
+    <p>Get the client token from your Gotify server (Clients → Create Client).</p>
+</script>

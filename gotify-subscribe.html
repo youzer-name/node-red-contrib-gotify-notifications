@@ -1,0 +1,53 @@
+<script type="text/javascript">
+    RED.nodes.registerType('gotify-subscribe',{
+        category: 'gotify',
+        color: '#d8bfd8',
+        defaults: {
+            name: {value:""},
+            server: {value:"", type:"gotify-server"},
+            client: {value:"", type:"gotify-clients"}
+        },
+        inputs: 0,
+        outputs: 1,
+        icon: "font-awesome/fa-rss",
+        label: function() {
+            return this.name || "gotify-subscribe";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="gotify-subscribe">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-server"><i class="fa fa-server"></i> Server</label>
+        <input type="text" id="node-input-server" placeholder="Select a Gotify Server">
+    </div>
+    <div class="form-row">
+        <label for="node-input-client"><i class="fa fa-user"></i> Client</label>
+        <input type="text" id="node-input-client" placeholder="Select a Gotify Client">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="gotify-subscribe">
+    <h3>Subscribe to Gotify messages</h3>
+    <p>This node connects to a Gotify server and listens for incoming messages using a <b>Client token</b>, via <b>WebSockets</b>.</p>
+
+    <h4>Configuration</h4>
+    <ul>
+        <li><b>Server</b>: Select a configured Gotify Server.</li>
+        <li><b>Client</b>: Select a Gotify Client token (from Clients in the Gotify UI).</li>
+    </ul>
+
+    <h4>Output</h4>
+    <p>Each incoming Gotify message is sent as <code>msg.payload</code>, containing the JSON data provided by the Gotify server.</p>
+
+    <h4>Status</h4>
+    <ul>
+        <li><b>connected</b>: actively receiving events</li>
+        <li><b>disconnected</b>: lost connection (the node will auto-reconnect after 5s)</li>
+        <li><b>error</b>: error while connecting or receiving data</li>
+    </ul>
+</script>
