@@ -1,0 +1,73 @@
+<script type="text/javascript">
+    RED.nodes.registerType('gotify-send',{
+        category: 'gotify',
+        color: '#a6bbcf',
+        defaults: {
+            name: {value:""},
+	    server: {value:"", type:"gotify-server"},
+	    app: {value:"", type:"gotify-apps"},
+	    priority: {value:"",validate:RED.validators.number()},
+	    title: {value:""},
+	    message: {value:""},
+	    markdown: {value:false},
+	    bigimage: {vlaue:""}
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "fa fa-send",
+        label: function() {
+            return this.name||"gotify-send";
+        },
+        oneditprepare: function() {
+                $("#node-input-markdown").typedInput({
+                type:'bool',
+                types:['bool']
+        	});
+	}
+    });
+</script>
+
+<script type="text/html" data-template-name="gotify-send">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-server"><i class="fa fa-server"></i> Server</label>
+        <input type="text" id="node-input-server" placeholder="http://serverip.lan">
+    </div>
+    <div class="form-row">
+        <label for="node-input-app"><i class="fa fa-tag"></i> App</label>
+        <input type="text" id="node-input-app" placeholder="App">
+    </div>
+    <div class="form-row">
+	<label for="node-input-priority"><i class="fa fa-tag"></i> Priority</label>
+	<input type="text" id="node-input-priority" placeholder="0-8">
+    </div>
+    <div class="form-row">
+	<label for="node-input-title"><i class="fa fa-tag"></i> Title</label>
+	<input type="text" id="node-input-title" placeholder="">
+    </div>
+    <div class="form-row">
+	<label for="node-input-message"><i class="fa fa-comment-o"></i> Message</label>
+	<input type="text" id="node-input-message" placeholder="">
+    </div>
+    <div class="form-row">
+	<label for="node-input-markdown"><i class="fa fa-tag"></i> Markdown</label>
+	<input type="text" id="node-input-markdown" placeholder="">
+    </div>
+    <div class="form-row">
+	<label for="node-input-bigimage"><i class="fa fa-link"></i> Bigimage</label>
+	<input type="text" id="node-input-bigimage" placeholder ="">
+</script>
+
+<script type="text/html" data-help-name="gotify-send">
+    <p>Send a message via Gotify</p>
+	<br /><br />Set up server and app tokens in the config nodes.
+	<br /><br />The following parameters can be passed as msg parts which will override any values configured in the node.
+	<br />Priority: msg.priority (0 through 8)
+	<br />Title: msg.title (message title)
+	<br />Message: msg.message (message body)
+	<br />Markdown: msg.markdown (true or false)
+	<br />Bigimage: msg.bigimage (URL of image)
+</script>

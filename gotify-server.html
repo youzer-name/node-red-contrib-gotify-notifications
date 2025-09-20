@@ -1,0 +1,42 @@
+<script type="text/javascript">
+    RED.nodes.registerType('gotify-server',{
+        category: 'config',
+        defaults: {
+            baseUrl: {value:"", required:true},
+            servername: {value:"Gotify Server", required:true},
+            port: {value:"", required:false, validate: function(v) {
+                if (v === "" || v === null || v === undefined) return true;
+                return RED.validators.number()(v);
+            }}
+        },
+        label: function() {
+            return this.servername;
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="gotify-server">
+    <div class="form-row">
+        <label for="node-config-input-servername"><i class="fa fa-server"></i> Name</label>
+        <input type="text" id="node-config-input-servername" placeholder="Friendly name">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-baseUrl"><i class="fa fa-link"></i> Base URL</label>
+        <input type="text" id="node-config-input-baseUrl" placeholder="https://gotify.example.com">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-port"><i class="fa fa-hashtag"></i> Port (optional)</label>
+        <input type="text" id="node-config-input-port" placeholder="Leave blank for default (80/443)">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="gotify-server">
+    <p><b>Gotify Server</b></p>
+    <p>Configure the base URL for your Gotify instance. The URL must include the protocol <code>http://</code> or <code>https://</code> and should not end with a trailing slash.</p>
+    <p><b>Port</b> is optional. If left empty the node will not append a port to the URL (useful for default ports).</p>
+    <p>Examples:</p>
+    <ul>
+        <li><code>https://gotify.example.com</code> (no port)</li>
+        <li><code>http://192.168.1.2</code> with Port <code>8080</code></li>
+    </ul>
+</script>

@@ -1,0 +1,112 @@
+<script type="text/javascript">
+    RED.nodes.registerType('gotify-send',{
+        category: 'gotify',
+        color: '#d8bfd8',
+        defaults: {
+            name: {value:""},
+            server: {value:"", type:"gotify-server"},
+            app: {value:"", type:"gotify-apps"},
+            priority: {value:"0", validate:RED.validators.number()},
+            title: {value:""},
+            message: {value:""},
+            markdown: {value:false},
+            bigimage: {value:""},
+            clickurl: {value:""},
+            androidChannel: {value:""}
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "fa fa-send",
+        label: function() {
+            return this.name || "gotify-send";
+        },
+        oneditprepare: function() {
+            $("#node-input-markdown").typedInput({
+                type: 'bool',
+                types: ['bool']
+            });
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="gotify-send">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-server"><i class="fa fa-server"></i> Server</label>
+        <input type="text" id="node-input-server" placeholder="Select a Gotify Server" />
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-app"><i class="fa fa-key"></i> App</label>
+        <input type="text" id="node-input-app" placeholder="Select a Gotify App" />
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-priority"><i class="fa fa-sort-numeric-asc"></i> Priority</label>
+        <input type="text" id="node-input-priority" placeholder="0 (low) - 8 (high)">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-title"><i class="fa fa-header"></i> Title</label>
+        <input type="text" id="node-input-title" placeholder="Message title">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-message"><i class="fa fa-comment-o"></i> Message</label>
+        <input type="text" id="node-input-message" placeholder="Message body">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-markdown"><i class="fa fa-file-text-o"></i> Markdown</label>
+        <input type="text" id="node-input-markdown" placeholder="true/false">
+        <div class="help">Set to true to send as <code>text/markdown</code>, false for <code>text/plain</code>.</div>
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-bigimage"><i class="fa fa-picture-o"></i> Big Image URL</label>
+        <input type="text" id="node-input-bigimage" placeholder="https://example.com/image.png">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-clickurl"><i class="fa fa-external-link"></i> Click URL</label>
+        <input type="text" id="node-input-clickurl" placeholder="https://example.com/some/page">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-androidChannel"><i class="fa fa-android"></i> Android Channel</label>
+        <input type="text" id="node-input-androidChannel" placeholder="android channel id (optional)">
+        <div class="help">Optional: specify Android channel for notifications (advanced).</div>
+    </div>
+</script>
+
+<script type="text/html" data-help-name="gotify-send">
+    <h3>Send a message via Gotify</h3>
+    <p>Configure a <b>Gotify Server</b> and one or more <b>Gotify Apps</b> using the config nodes. This node sends messages to the selected app using the app's token.</p>
+
+    <h4>Fields</h4>
+    <ul>
+        <li><b>Priority</b> — msg.priority overrides configured priority (0..8).</li>
+        <li><b>Title</b> — msg.title overrides configured title.</li>
+        <li><b>Message</b> — msg.message overrides configured message body.</li>
+        <li><b>Markdown</b> — (boolean) set true to send as markdown (<code>text/markdown</code>), false for plain text (<code>text/plain</code>).</li>
+        <li><b>Big Image URL</b> — show a large image in the notification. Can be overridden by msg.bigimage.</li>
+        <li><b>Click URL</b> — open this URL when the notification is clicked. Can be overridden by msg.clickurl.</li>
+        <li><b>Android Channel</b> — optional channel id to send to Android clients.</li>
+    </ul>
+
+    <h4>Override from incoming message</h4>
+    <p>Any of the above fields can be overridden by setting the corresponding <code>msg</code> property in the incoming message:</p>
+    <pre>
+msg.title
+msg.message
+msg.priority
+msg.markdown
+msg.bigimage
+msg.clickurl
+msg.androidChannel
+    </pre>
+</script>

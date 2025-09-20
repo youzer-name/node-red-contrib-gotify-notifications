@@ -1,0 +1,29 @@
+<script type="text/javascript">
+    RED.nodes.registerType('gotify-apps',{
+        category: 'config',
+        defaults: {
+            appname: {value:"", required:true},
+            token: {value:"", required:true}
+        },
+        label: function() {
+            return this.appname;
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="gotify-apps">
+    <div class="form-row">
+        <label for="node-config-input-appname"><i class="fa fa-tag"></i> App Name</label>
+        <input type="text" id="node-config-input-appname" placeholder="Friendly app name">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-token"><i class="fa fa-key"></i> Token</label>
+        <input type="text" id="node-config-input-token" placeholder="Application token (required)">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="gotify-apps">
+    <p><b>Gotify App</b></p>
+    <p>Create one <b>App</b> config node per Gotify app token. This token is used to send messages to that app.</p>
+    <p>Get the token from your Gotify server (Apps &gt; Copy Token).</p>
+</script>
