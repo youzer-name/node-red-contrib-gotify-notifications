@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-gotify-notifications",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Node-RED nodes to send notifications to a Gotify server",
   "main": "index.js",
   "scripts": {
